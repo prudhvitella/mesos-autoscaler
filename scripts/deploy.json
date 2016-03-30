@@ -1,0 +1,28 @@
+{
+  "id": "/autoscaler",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "prudhvitella/mesos-autoscaler",
+      "forcePullImage": true,
+      "network": "HOST"
+    }
+  },
+  "instances": 1,
+  "mem": 128,
+  "cpus": 0.1,
+  "healthChecks": [
+     { "protocol": "HTTP",
+       "path": "/",
+       "gracePeriodSeconds": 60,
+       "portIndex": 0,
+       "timeoutSeconds": 30,
+       "maxConsecutiveFailures": 5
+     }
+   ],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 1.0,
+    "maximumOverCapacity": 1.0
+  },
+  "ports": [0]
+}
